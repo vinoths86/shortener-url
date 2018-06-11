@@ -13,7 +13,7 @@ class ShortnersController < ApplicationController
       render json: {
           status: false,
           data: 'Invalid Auth Token'
-      }
+      }, status: :unauthorized
       return
     end
 
@@ -33,7 +33,6 @@ class ShortnersController < ApplicationController
   end
 
   def redirect
-    byebug
     url = Shortner.find_by_short_url(params[:url])
     unless url
       head :not_found
